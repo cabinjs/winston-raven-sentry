@@ -310,10 +310,16 @@ meta.extra.err = {
 
 This ensures that your stack trace and error message are visible and saved to Sentry.
 
+Furthermore, if `msg` was an Error object, then we will automatically set `msg = msg.message`.
+
+This will prevent you from receiving the following message in Sentry:
+
+![example-error](https://i.imgur.com/Bzpk3hr.png)
+
 
 ## Recommended Logging Approach
 
-As of v1.0.0 we now log messages to Sentry differently using `captureMessage` and `captureException`.  There was a core bug in all prior versions that did not pass along the log level properly, therefore it was refactored and also built to the standards of `raven` itself.
+Compared to packages such as `winston-sentry` and `winston-raven`, we log messages to Sentry more accurately using `captureMessage` and `captureException` (and take into consideration `Error` instances).  There was a core bug in all other similar packages on NPM that did not pass along the log level properly, therefore it was refactored and also built to the standards of `raven` itself (e.g. we utilize the defaults that they also do, see above options).
 
 Here are a few examples provided below for how we recommend logging:
 

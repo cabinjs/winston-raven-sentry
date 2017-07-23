@@ -88,11 +88,16 @@ Sentry.prototype.log = function(level, msg, meta, fn) {
   meta.level = this._levelsMap[level];
   meta.extra = meta.extra || {};
 
-  if (_.isError(msg) && !_.isObject(meta.extra.err))
+  if (_.isError(msg) && !_.isObject(meta.extra.err)) {
     meta.extra.err = { stack: msg.stack, message: msg.message };
+    msg = msg.message;
+  }
 
-  if (_.isError(meta) && !_.isObject(meta.extra.err))
+  if (_.isError(meta) && !_.isObject(meta.extra.err)) {
     meta.extra.err = { stack: meta.stack, message: meta.message };
+    if (!_.isString(msg))
+      msg = meta.message;
+  }
 
   if (meta.level === 'error' || meta.level === 'fatal')
     return this.raven.captureException(msg, meta, function() {
