@@ -278,7 +278,7 @@ If no log level mapping was found for the given `level` passed, then it will not
 
 ### Custom Attributes
 
-If you need to log custom attributes, such as `extra, `user`, or `tags` attributes, specify them in the `meta` object.
+If you need to log custom attributes, such as `extra`, `user`, or `tags` attributes, specify them in the `meta` object.
 
 For example:
 
