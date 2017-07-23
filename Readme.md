@@ -108,6 +108,8 @@ app.use(logger.transports.sentry.raven.requestHandler(true));
 app.on('error', function(err, ctx) {
   logger.error(err);
 });
+
+app.listen(3000);
 ```
 
 > Log an error or info message with `req.logger`:
@@ -143,9 +145,19 @@ logger.add(Sentry, {
   // ...
 });
 
+// define this first before all else
+app.use(logger.transports.sentry.raven.requestHandler());
+
 app.use(passport.initialize());
 
-app.use(logger.transports.sentry.raven.requestHandler());
+app.get('/', function(req, res, next) {
+  throw new Error('oops!');
+});
+
+// keep this before all other error handlers
+app.use(logger.transports.sentry.raven.errorHandler());
+
+app.listen(3000);
 ```
 
 > Log an error or info message with `req.logger`:
