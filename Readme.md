@@ -87,8 +87,6 @@ If you need to whitelist only certain fields from `ctx.state.user` or `req.user`
 
 ### Koa Example
 
-> Add custom middleware to bind `logger` to `ctx.logger` with pre-populated user and request info:
-
 ```js
 const winston = require('winston');
 const Sentry = require('winston-raven-sentry');
@@ -130,8 +128,6 @@ app.use(async function(ctx, next) {
 ```
 
 ### Express Example
-
-> Add custom middleware to bind `logger` to `req.logger` with pre-populated user and request info:
 
 ```js
 const winston = require('winston');
