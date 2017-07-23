@@ -20,8 +20,8 @@ The **maintained** and **well-documented** [Raven](https://github.com/getsentry/
 * [How to use with Koa/Express/Passport?](#how-to-use-with-koa-express-passport-)
   - [Koa Example](#koa-example)
   - [Express Example](#express-example)
-* [Options](#options-options-)
-  - [Default Raven Options](#default-raven-options-options-config-)
+* [Options](#options-options)
+  - [Default Raven Options](#default-raven-options-optionsconfig)
   - [Default Error Handler](#default-error-handler-options-errorhandler-)
   - [Uncaught Exceptions](#uncaught-exceptions)
   - [Unhandled Promise Rejections](#unhandled-promise-rejections)
@@ -72,7 +72,7 @@ const logger = new winston.Logger();
 logger.add(Sentry, options);
 ```
 
-See [Options](#options-options-) below for custom configuration.
+See [Options](#options-options) below for custom configuration.
 
 
 ## How to use with Koa/Express/Passport?
@@ -171,7 +171,7 @@ Per `options` variable above, here are the default options provided:
 Default Sentry options:
 
 * `dsn` (String) - your Sentry DSN or Data Source Name (defaults to `process.env.SENTRY_DSN`)
-* `config` (Object) - a Raven configuration object (see [Default Raven Options](#default-raven-options-options-config-) below)
+* `config` (Object) - a Raven configuration object (see [Default Raven Options](#default-raven-options-optionsconfig) below)
 * `install` (Boolean) - automatically catches uncaught exceptions through `Raven.install` if set to true (defaults to `false`)
 * `errorHandler` (Function) - a callback function to use for logging Raven errors (e.g. an invalid DSN key).  This defaults to logging the `err.message`, see [Default Error Handler](#default-error-handler-options-errorhandler-) below... but if you wish to disable this just pass `errorHandler: false`. If there is already an `error` listener then this function will not get bound.
 * `raven` (Object) - an optional instance of `Raven` that is already configured via `Raven.config` (if provided this will be used instead of the `config` option
