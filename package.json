@@ -1,0 +1,41 @@
+{
+  "name": "winston-raven-sentry",
+  "description": "The maintained and well-documented Raven/Sentry transport for the winston logger with support for Koa/Express/Passport",
+  "version": "1.0.0",
+  "author": "Nick Baugh",
+  "bugs": {
+    "url": "https://github.com/niftylettuce/winston-raven-sentry/issues"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "raven": "^2.1.0"
+  },
+  "devDependencies": {
+    "winston": "^2.3.1"
+  },
+  "engines": {
+    "node": ">= 4.8.4"
+  },
+  "main": "index.js",
+  "homepage": "https://github.com/niftylettuce/winston-raven-sentry#readme",
+  "keywords": [
+    "bunyan",
+    "logger",
+    "loggly",
+    "morgan",
+    "raven",
+    "sentry",
+    "transport",
+    "winston",
+    "koa",
+    "express"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "winston": ">= 2.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/niftylettuce/winston-raven-sentry.git"
+  }
+}
