@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.4",
-    "raven": "^2.1.0"
+    "raven": "^2.6.0"
   },
   "devDependencies": {
     "winston": "^2.3.1"
