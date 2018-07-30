@@ -1,7 +1,7 @@
 {
   "name": "winston-raven-sentry",
   "description": "The maintained and well-documented Raven/Sentry transport for the winston logger with support for Koa/Express/Passport",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "author": "Nick Baugh",
   "bugs": {
     "url": "https://github.com/niftylettuce/winston-raven-sentry/issues"
