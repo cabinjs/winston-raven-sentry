@@ -84,30 +84,54 @@ Sentry.prototype.log = function(level, msg, meta, fn) {
   if (this.silent) return fn(null, true);
   if (!(level in this._levelsMap)) return fn(null, true);
 
-  meta = meta || {};
-  meta.level = this._levelsMap[level];
-  meta.extra = meta.extra || {};
+  const message = this._normalizeMessage(msg, meta);
+  const context = _.isObject(meta) ? meta : {};
+  context.level = this._levelsMap[level];
+  context.extra = this._normalizeExtra(msg, meta);
 
-  if (_.isError(msg) && !_.isObject(meta.extra.err)) {
-    meta.extra.err = { stack: msg.stack, message: msg.message };
-    msg = msg.message;
-  }
-
-  if (_.isError(meta) && !_.isObject(meta.extra.err)) {
-    meta.extra.err = { stack: meta.stack, message: meta.message };
-    if (!_.isString(msg))
-      msg = meta.message;
-  }
-
-  if (meta.level === 'error' || meta.level === 'fatal')
-    return this.raven.captureException(msg, meta, function() {
+  if (this._shouldCaptureException(context.level))
+    return this.raven.captureException(message, context, function() {
       fn(null, true);
     });
 
-  this.raven.captureMessage(msg, meta, function() {
+  this.raven.captureMessage(message, context, function() {
     fn(null, true);
   });
 
 }
+
+Sentry.prototype._shouldCaptureException = function(level) {
+  return level === 'error' || level === 'fatal';
+}
+
+Sentry.prototype._normalizeExtra = function(msg, meta) {
+
+  const extra = _.isObject(meta) ? (meta.extra || {}) : {};
+
+  if (_.isError(msg) && !_.isObject(extra.err)) {
+    extra.err = { stack: msg.stack, message: msg.message };
+  }
+
+  if (_.isError(meta) && !_.isObject(extra.err)) {
+    extra.err = { stack: meta.stack, message: meta.message };
+  }
+
+  return extra;
+}
+
+Sentry.prototype._normalizeMessage = function(msg, meta) {
+  let message = msg;
+
+  if (_.isError(msg)) {
+    message = msg.message;
+  }
+
+  if (_.isError(meta) && !_.isString(message)) {
+      message = meta.message;
+  }
+
+  return message;
+}
+
 
 module.exports = Sentry;
